@@ -116,7 +116,27 @@ export default function Index(props: any) {
                 </div>
                 <button onClick={()=> clickHandler("Electricity Control", false, "")} className= " text-[#98AD17] ">Change</button>
             </div>
-            <div className=' w-full border-b border-[#444444] px-4 h-[58px] flex items-center' >
+
+            <div className=' w-full border-b border-[#444444] px-4 pt-[18px] flex flex-col ' >
+                <p className='mr-8 mb-[18px]' >NairaPin</p>   
+                <div className=' w-full border-t border-[#444444] px-6 py-[17px] flex items-center' >
+                    <p className='mr-8' >NairaPin Create</p>  
+                    <p className=' text-[#C0C0C0] ml-auto' >Status:  <span className={!props.data?.nairpinToggle ? ' text-[#D8453B]':' text-white '} >{!props.data?.nairpinToggle ? "OFF":"ON"}</span></p> 
+                    <div className='border-l flex items-center ml-4 pl-4 border-[#444444]' >
+                        <p className=' text-[#C0C0C0] mr-6' >Message: <span className=' text-white '>{message.length > 22 ? message.slice(0, 22)+"...": message }</span></p>  
+                    </div>
+                <button onClick={()=> clickHandler("NairaPin Redeem Control", props.data?.nairpinRedeemToggle, "nairpinRedeemToggle")} className= " text-[#98AD17] ">Change</button>
+                </div>
+                <div className=' w-full border-t border-[#444444] px-6 py-[17px] flex items-center' >
+                    <p className='mr-8' >NairaPin Redeem</p>  
+                    <p className=' text-[#C0C0C0] ml-auto' >Status:  <span className={!props.data?.nairpinRedeemToggle ? ' text-[#D8453B]':' text-white '} >{!props.data?.nairpinRedeemToggle ? "OFF":"ON"}</span></p> 
+                    <div className='border-l flex items-center ml-4 pl-4 border-[#444444]' >
+                        <p className=' text-[#C0C0C0] mr-6' >Message: <span className=' text-white '>{message.length > 22 ? message.slice(0, 22)+"...": message }</span></p>  
+                    </div>
+                <button onClick={()=> clickHandler("NairaPin Redeem Control", props.data?.nairpinRedeemToggle, "nairpinRedeemToggle")} className= " text-[#98AD17] ">Change</button>
+                </div>
+            </div>
+            {/* <div className=' w-full border-b border-[#444444] px-4 h-[58px] flex items-center' >
                 <p className='mr-8' >NairaPin</p>  
                     <p className=' text-[#C0C0C0] ml-auto' >Status:  <span className={!props.data?.nairpinToggle ? ' text-[#D8453B]':' text-white '} >{!props.data?.nairpinToggle ? "OFF":"ON"}</span></p> 
                 <div className='border-l flex items-center ml-4 pl-4 border-[#444444]' >
@@ -131,7 +151,7 @@ export default function Index(props: any) {
                     <p className=' text-[#C0C0C0] mr-6' >Message: <span className=' text-white '>{message.length > 22 ? message.slice(0, 22)+"...": message }</span></p>  
                 </div>
                 <button onClick={()=> clickHandler("NairaPin Redeem Control", props.data?.nairpinRedeemToggle, "nairpinRedeemToggle")} className= " text-[#98AD17] ">Change</button>
-            </div>
+            </div> */}
             <div className=' w-full border-b border-[#444444] px-4 h-[58px] flex items-center' >
                 <p className='mr-8' >Send Money (Banks)</p>  
                 <p className=' text-[#C0C0C0] ml-auto' >Status: <span className={!props.data?.bankTransferToggle ? ' text-[#D8453B]':' text-white '} >{!props.data?.bankTransferToggle ? "OFF":"ON"}</span></p> 
