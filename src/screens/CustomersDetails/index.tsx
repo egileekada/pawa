@@ -9,7 +9,7 @@ import { IUser, UserContext } from '../../context/userContext'
 import TransactionScreen from '../TransactionScreen' 
 import ModalComponent from '../../components/ModalComponent'
 import { useToast } from '@chakra-ui/react'
-import { useUpdateUserInfoCallback } from '../../action/useAction'
+import { useUpdateUserInfoCallback, useUpdateUserPinInfoCallback } from '../../action/useAction'
 
 export default function Index() { 
 
@@ -23,6 +23,7 @@ export default function Index() {
     const navigate = useNavigate()
     const toast = useToast()
     const { handleUpdateUserInfo } = useUpdateUserInfoCallback() 
+    const { handleUpdateUserPinInfo } = useUpdateUserPinInfoCallback() 
 
     const GetUserInfoByID =async()=>{ 
         const t1 = setTimeout(() => {
@@ -59,20 +60,42 @@ export default function Index() {
     const openModal =(item: any)=> {
         setModalName(item)
         setOpen(true)
-    }
-
-
+    } 
 
     const onUpdateHandler =async(name: any, item: boolean)=>{ 
         // setLoading(true)
-        let dataPayload : any
+        let dataPayload : any 
+
         if(name === "suspend"){  
-            dataPayload = {suspend: item}
-        } else {
-            dataPayload = {deactivate: item}
+            dataPayload = {suspend: item} 
+        }else {
+            dataPayload = {deactivate: item} 
         } 
 
         const request: any = await handleUpdateUserInfo(JSON.stringify(dataPayload), userData[0]._id)
+        
+        if (request.status === 200) {   
+            toast({
+                title: request?.data?.message,
+                position: "bottom",
+                status: "success",
+                isClosable: true,
+            })
+        } else {
+            toast({
+                title: request?.data?.message,
+                position: "bottom",
+                status: "error",
+                isClosable: true,
+            })
+        }  
+        setCheck((prev)=> !prev)
+        setLoading(false)  
+    } 
+
+    const onChangePinHandler =async()=>{  
+
+        const request: any = await handleUpdateUserPinInfo(userData[0]._id)
         
         if (request.status === 200) {   
             toast({
@@ -105,6 +128,9 @@ export default function Index() {
                 </button>
                 <button onClick={()=> openModal("Debit User Wallet")} className=' px-3 outline-none h-[45px] bg-[#98AD17] ml-4 ' >
                     Debit Wallet
+                </button>
+                <button onClick={()=> onChangePinHandler()} className={' px-3 outline-none h-[45px] bg-[#98AD17] ml-4 ' } >
+                    {"Reset PIN"} 
                 </button>
                 <button onClick={()=> onUpdateHandler("suspend", !userData[0]?.suspend)} className={userData[0]?.suspend ? ' px-3 outline-none h-[45px] bg-[#ff0000] ml-4 ' : ' px-3 outline-none h-[45px] bg-[#98AD17] ml-4 '} >
                     {userData[0]?.suspend ? "Retain User" : "Suspend User"}

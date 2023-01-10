@@ -150,6 +150,7 @@ export default function Index(props: any) {
                 <div className='border-l flex items-center ml-4 pl-4 border-[#444444]' >
                     <p className=' text-[#C0C0C0] mr-6' >Message: <span className=' text-white '>{message.length > 22 ? message.slice(0, 22)+"...": message }</span></p>  
                 </div>
+                22393535312
                 <button onClick={()=> clickHandler("NairaPin Redeem Control", props.data?.nairpinRedeemToggle, "nairpinRedeemToggle")} className= " text-[#98AD17] ">Change</button>
             </div> */}
             <div className=' w-full border-b border-[#444444] px-4 h-[58px] flex items-center' >
