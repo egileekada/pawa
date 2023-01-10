@@ -54,3 +54,21 @@ export function useUpdateUserInfoCallback() {
   }
   return { handleUpdateUserInfo }
 } 
+
+export function useUpdateUserPinInfoCallback() {
+  const handleUpdateUserPinInfo = async (index: any): Promise<any> => {    
+    try{ 
+        const response = await axios.get("/user/generate/pin/"+index,
+        {
+            headers: {
+                'Content-Type':'application/json', 
+                Authorization : `Bearer ${localStorage.getItem('token')}`
+            }, 
+        }); 
+        return response       
+    } catch(err: any) { 
+      return err?.response    
+    }     
+  }
+  return { handleUpdateUserPinInfo }
+} 
